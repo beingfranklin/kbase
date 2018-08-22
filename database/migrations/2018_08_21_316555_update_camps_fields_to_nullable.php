@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRolesTable extends Migration
+class UpdateCampsFieldsToNullable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateRolesTable extends Migration
      */
     public function up()
     {
-        Schema::create('roles', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('role_name', 50);
+        Schema::table('camps', function (Blueprint $table) {
+            $table->string('location_coordinates', 100)->nullable()->default(null)->change();
+            $table->string('max_capacity')->nullable()->change();
         });
     }
 
@@ -26,6 +26,5 @@ class CreateRolesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('roles');
     }
 }

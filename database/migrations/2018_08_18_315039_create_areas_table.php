@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePermissionMapsTable extends Migration
+class CreateAreasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreatePermissionMapsTable extends Migration
      */
     public function up()
     {
-        Schema::create('permission_maps', function (Blueprint $table) {
+        Schema::create('areas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('permission_name', 50);
-            $table->string('path');
-            $table->string('element');
-            $table->timestamps();
+            $table->string('name');
+            $table->unsignedInteger('district_id');
+            $table->foreign('district_id')->references('id')->on('districts');
         });
     }
 
@@ -29,6 +28,6 @@ class CreatePermissionMapsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('permission_maps');
+        Schema::dropIfExists('areas');
     }
 }
